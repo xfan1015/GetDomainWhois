@@ -1,0 +1,22 @@
+{{template "header"}}
+<link rel="stylesheet"  href="/static/css/signin.css">
+<title>登录，我的博客</title>
+</head>
+<body>
+    <div class="container">
+        <form class="form-signin" method="POST" action="/login">
+            <h1 class="form-signin-heading">Please sign in</h1>
+            <label for="uname" class="sr-only">Account</label>
+            <input id="uname" class="form-control" placeholder="Enter User Name" name="uname" required autofocus>
+            <label for="pwd" class="sr-only">Password</label>
+            <input type="password" id="pwd" class="form-control" placeholder="Enter password" name="pwd" required>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="autologin" vaule="remember-me">自动登录</input>
+                </label>
+            </div>
+            <button type="submit" class="btn btn-lg btn-primary btn-block" >登录</button>
+        </form>
+    </div>
+</body>
+</html>
