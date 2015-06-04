@@ -1,0 +1,10 @@
+ <div class="container"> <!-- container -->
+        <div class="jumbotron">
+            <center><h1>域名WHOIS信息查询</h1></center>
+            <p>该网站实现所有域名的WHOIS信息查询，主要内容包括域名的注册者、电话、邮箱、详细信息等</p>
+            <p>直接与域名注册商进行交互连接，可以尽快得到域名的whois信息，网站已经实现150个顶级域名注册商域名whois信息的获取</p>
+            <p>
+            <a class="btn btn-lg btn-primary" href="/moreinfomation" role="button">更多信息</a>
+            </p>
+        </div>
+    </div> <!-- /container -->

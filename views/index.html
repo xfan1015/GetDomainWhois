@@ -1,0 +1,81 @@
+{{template "header"}}
+<title>域名WHOIS信息查询</title>
+<link rel="stylesheet" type="text/css" href="/static/css/test.css">
+</head>
+<body>
+    {{template "navbar" .}}       <!--注意(.)的使用，是实现导航栏的动态效果-->
+    <!-- carousel -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1"></li>
+        <li data-target="#myCarousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="item active">
+          <img class="first-slide" alt="First slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Whois百科</h1>
+              <p>Whois是是用来查询域名的IP以及所有者等信息的传输协议。简单说，Whois就是一个用来查询域名是否已经被注册，以及注册域名的详细信息的数据库（如域名所有人、域名注册商）</p>
+              <p><a class="btn btn-lg btn-primary" href="/whoismoreinfo" role="button">Learn more</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img class="second-slide" alt="Second slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Whois 查询</h1>
+              <p>该网站为用户提供免费的域名whois信息查询，只需要输入对应域名或者网址，例如<code>baidu.com</code>,您将会得到该域名所对应的whois信息，包括注册者姓名、电话、邮箱、详细信息等内容</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img class="third-slide" alt="Third slide">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>域名注册商</h1>
+              <p>该功能提供全球已知的顶级域名注册商的服务器地址，例如<code>.cn</code>为<code>whois.nic.cn</code>,并且提供该顶级域名的所有二级域名</p>
+              <p><a class="btn btn-lg btn-primary" href="#" role="button">Learn more</a></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div><!-- /.carousel -->
+
+    <div class="container">
+        <form class="form-inline">
+          <div class="form-group">
+            <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+            <div class="input-group">
+              <div class="input-group-addon">输入域名</div>
+              <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+              <div class="input-group-addon">.00</div>
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary">查询</button>
+        </form>
+    </div>
+
+
+   <!--  <div class="container">
+    <footer>
+        <p class="pull-right"><a href="#">Back to top</a></p>
+        <p>&copy; 2014 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      </footer>
+  </div> -->
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -4,11 +4,10 @@ import (
 	"github.com/astaxie/beego"
 )
 
-type MainController struct {
+type WhoisMoreController struct {
 	beego.Controller
 }
 
-func (c *MainController) Get() {
-	c.Data["isHome"] = true
+func (c *WhoisMoreController) Get() {
 	c.TplNames = "index.html"
 }
