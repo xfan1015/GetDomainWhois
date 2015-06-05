@@ -9,7 +9,10 @@ body {
   /*padding-top: 70px;*/
 
 }
-
+/*使表格内容居中*/
+.table th, .table td {
+    text-align: center;
+}
 
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
