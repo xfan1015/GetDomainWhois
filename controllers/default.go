@@ -10,7 +10,7 @@ type MainController struct {
 }
 
 func (c *MainController) Get() {
-	c.Data["isHome"] = true
+	c.Data["IsHome"] = true
 	var err error
 	c.Data["Domainwhois"], err = models.GetAllWhois()
 	if err != nil {

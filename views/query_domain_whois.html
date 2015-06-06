@@ -1,0 +1,111 @@
+{{template "header"}}
+<title>域名WHOIS信息查询</title>
+<link rel="stylesheet" type="text/css" href="/static/css/main.css">
+</head>
+<body>
+{{template "navbar" .}}
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-offset-1 col-md-7">
+				<form class="form-inline">
+				  <div class="form-group">
+				    <label class="sr-only" for="exampleInputAmount">Amount (in dollars)</label>
+				    <div class="input-group">
+				      <div class="input-group-addon">域名</div>
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+				    </div>
+				  </div>
+				  <button type="submit" class="btn btn-primary">查询</button>
+				</form>
+
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+	</div>
+	<br>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<p class="text-success">
+				<strong>sina.com的最新whois信息</strong>
+				</p>
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-6">
+				 <table class="table table-striped ">
+				        <tr>
+				            <td>
+				            	<span class="glyphicon glyphicon-home"></span>
+				            	<strong>域名</strong>
+				            </td>
+
+				            <td>sina.com</td>
+				        </tr>
+				        <tr>
+				            <td>
+				            	<span class="glyphicon glyphicon-user"></span>
+				            	<strong>注册者</strong>
+				            </td>
+				            <td>wujingming</td>
+				        </tr>
+				        <tr>
+				            <td>
+				            	<span class="glyphicon glyphicon-send"></span>
+				            	<strong>邮箱</strong>
+				            </td>
+				            <td>for_cyn@outlook.com</td>
+				        </tr>
+				        <tr>
+				            <td>
+				            	<span class="glyphicon glyphicon-earphone"></span>
+				            	<strong>电话</strong>
+				            </td>
+				            <td>1111111111</td>
+				        </tr>
+				        <tr>
+				            <td>
+				            	<span class="glyphicon glyphicon-open"></span>
+				            	<strong>IP</strong>
+				            </td>
+				            <td>1.1.1.1</td>
+				        </tr>
+				        <tr>
+				            <td>				        
+				            	<span class="glyphicon glyphicon-cloud-download"></span>
+				            	<strong>详细信息</strong>
+				            </td>
+				            <td>sina.com</td>
+				        </tr>
+				</table>
+			</div>
+			<div class="col-md-2">
+				<table class="table table-hover">
+					<caption>历史记录</caption>
+					<tr>
+						<td>2015-4-5</td>
+					</tr>
+					<tr>
+						<td>2013-4-5</td>
+					</tr>
+					<tr>
+						<td>2011-4-5</td>
+					</tr>
+				</table>
+			</div>
+			<div class="col-md-2"></div>
+		</div>
+
+	</div>
+
+
+
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+
+</html>
