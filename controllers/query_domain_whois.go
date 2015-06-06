@@ -15,3 +15,7 @@ func (c *QueryController) Get() {
 	c.TplNames = "query_domain_whois.html"
 
 }
+
+func (c *QueryController) Post() {
+	c.Ctx.WriteString("content")
+}
