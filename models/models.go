@@ -32,3 +32,10 @@ func GetAllWhois() ([]*DomainWhois, error) {
 	return dw, err
 
 }
+
+func QueryDomain(query_domain string) DomainWhois {
+	o := orm.NewOrm()
+	domain := DomainWhois{Domain: query_domain}
+	o.Read(&domain, "Domain") //指定字段进行查询
+	return domain
+}

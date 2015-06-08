@@ -59,11 +59,11 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="clo-md-4">
-                <form class="form-inline" method="POST" action="/query">
+                <form class="form-inline" method="GET" action="/query">
                     <div class="form-group">
                         <div class="input-group">
-                           
-                            <input type="text" class="form-control" id="exampleInputAmount" placeholder="域名" required>
+                            <input type="hidden" name="op" value="query">
+                            <input type="text" class="form-control" id="exampleInputAmount" placeholder="域名" name="query_domain" required>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">查询</button>

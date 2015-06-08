@@ -3,16 +3,20 @@
 <link rel="stylesheet" type="text/css" href="/static/css/main.css">
 </head>
 <body>
-{{template "navbar" .}}
+	<!-- 固定导航栏 -->
+	{{template "navbar" .}}
+
+    <!-- 查询框 -->
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2"></div>
-			<div class="col-md-offset-1 col-md-7">
+			<div class="col-md-8">
 				<form class="form-inline" method="GET" action="/query">
 				  <div class="form-group">
 				    <div class="input-group">
 				      <div class="input-group-addon">域名</div>
-				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="Amount">
+				      <input type="hidden" name="op" value="query">
+				      <input type="text" class="form-control" id="exampleInputAmount" placeholder="请输入域名" name="query_domain">
 				    </div>
 				  </div>
 				  <button type="submit" class="btn btn-primary">查询</button>
@@ -21,14 +25,16 @@
 			</div>
 			<div class="col-md-2"></div>
 		</div>
-	</div>
+	</div><!-- -->
+   	
 	<br>
+	<!-- 结果展示界面 -->
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<p class="text-success">
-				<strong>sina.com的最新whois信息</strong>
+					域名<strong>{{.domain.Domain}}</strong> 的最新whois信息
 				</p>
 			</div>
 			<div class="col-md-2"></div>
@@ -43,42 +49,42 @@
 				            	<strong>域名</strong>
 				            </td>
 
-				            <td>sina.com</td>
+				            <td>{{.domain.Domain}}</td>
 				        </tr>
 				        <tr>
 				            <td>
 				            	<span class="glyphicon glyphicon-user"></span>
 				            	<strong>注册者</strong>
 				            </td>
-				            <td>wujingming</td>
+				            <td>{{.domain.RegName}}</td>
 				        </tr>
 				        <tr>
 				            <td>
 				            	<span class="glyphicon glyphicon-send"></span>
 				            	<strong>邮箱</strong>
 				            </td>
-				            <td>for_cyn@outlook.com</td>
+				            <td>{{.domain.RegEmail}}</td>
 				        </tr>
 				        <tr>
 				            <td>
 				            	<span class="glyphicon glyphicon-earphone"></span>
 				            	<strong>电话</strong>
 				            </td>
-				            <td>1111111111</td>
+				            <td>{{.domain.RegPhone}}</td>
 				        </tr>
 				        <tr>
 				            <td>
 				            	<span class="glyphicon glyphicon-open"></span>
 				            	<strong>IP</strong>
 				            </td>
-				            <td>1.1.1.1</td>
+				            <td>{{.domain.Ip}}</td>
 				        </tr>
 				        <tr>
 				            <td>				        
 				            	<span class="glyphicon glyphicon-cloud-download"></span>
 				            	<strong>详细信息</strong>
 				            </td>
-				            <td>sina.com</td>
+				            <td>待定</td>
 				        </tr>
 				</table>
 			</div>
