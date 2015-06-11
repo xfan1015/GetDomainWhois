@@ -7,7 +7,7 @@
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li{{if .IsHome}}  class="active"{{end}}> <a href="/">首页</a> </li>
-                <li{{if .IsQuery}}  class="active"{{end}}> <a href="/query">域名whois查询</a> </li>
+                <li{{if .IsQuery}}  class="active"{{end}}> <a href="/whois">域名whois查询</a> </li>
                 <li{{if .IsTopic}}  class="active"{{end}}> <a href="/topic">统计分析</a> </li>
                 <li{{if .IsTopic}}  class="active"{{end}}> <a href="/topic">注册商查询</a> </li>
             </ul>

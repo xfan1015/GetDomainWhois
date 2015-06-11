@@ -4,7 +4,9 @@ import (
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
 	// "github.com/astaxie/beego"
-	// "fmt"
+	"GetDomainWhois/whoisonline"
+	"fmt"
+	"time"
 )
 
 type DomainWhois struct {
@@ -13,10 +15,11 @@ type DomainWhois struct {
 	Ip             string
 	TopWhoisServer string
 	SecWhoisServer string
-	RegName        string `orm:"index"`
-	RegEmail       string `orm:"index"`
-	RegPhone       string `orm:"index"`
-	Details        string `orm:"size(10000)"`
+	RegName        string    `orm:"index"`
+	RegEmail       string    `orm:"index"`
+	RegPhone       string    `orm:"index"`
+	Details        string    `orm:"size(10000)"`
+	QueryTime      time.Time `orm:"index"`
 }
 
 func init() {
@@ -28,14 +31,38 @@ func GetAllWhois() ([]*DomainWhois, error) {
 	dw := make([]*DomainWhois, 0)
 	qs := o.QueryTable("domain_whois")
 	_, err := qs.All(&dw)
-	// fmt.Println(dw)
 	return dw, err
 
 }
 
-func QueryDomain(query_domain string) DomainWhois {
+func QueryDomain(queryDomain string) DomainWhois {
 	o := orm.NewOrm()
-	domain := DomainWhois{Domain: query_domain}
-	o.Read(&domain, "Domain") //指定字段进行查询
-	return domain
+	domain := DomainWhois{Domain: queryDomain}
+	err := o.Read(&domain, "Domain") //指定字段进行查询
+	if err == orm.ErrNoRows {
+		fmt.Println("数据库未有该项,正在在线查询")
+		// return domain
+		return QueryOnline(queryDomain)
+	} else {
+		return domain
+	}
+}
+
+func QueryOnline(queryDomain string) DomainWhois {
+	domain := &whoisonline.Domain{}
+	domain.ReturnWhois(queryDomain)
+	// whois.Domain=domain.DomainName
+	// whois.Details=domain.Details
+	whois := &DomainWhois{
+		Domain:         domain.DomainName,
+		TopWhoisServer: domain.TopWhoisSrv,
+		SecWhoisServer: domain.SecWhoisSrv,
+		RegName:        domain.RegName,
+		RegEmail:       domain.RegEmail,
+		RegPhone:       domain.RegPhone,
+		Details:        domain.Details,
+		QueryTime:      time.Now(),
+	}
+	fmt.Println(whois.Details)
+	return *whois
 }
