@@ -56,6 +56,11 @@ func (domain *Domain) domainWhois() {
 	// fmt.Println(result)
 	// fmt.Println(err)
 	domain.Details = result
+	regname, regphone, regemail := ExtractWhoisInfo(result, domain.TopWhoisSrv)
+	domain.RegName = regname
+	domain.RegEmail = regemail
+	domain.RegPhone = regphone
+
 }
 
 func (domain *Domain) ReturnWhois(rawurl string) {

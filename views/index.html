@@ -59,11 +59,10 @@
         <div class="row">
             <div class="col-md-4"></div>
             <div class="clo-md-4">
-                <form class="form-inline" method="GET" action="/query">
+                <form class="form-inline" method="GET" action="/whois/query">
                     <div class="form-group">
                         <div class="input-group">
-                            <input type="hidden" name="op" value="query">
-                            <input type="text" class="form-control" id="exampleInputAmount" placeholder="域名" name="query_domain" required>
+                            <input type="text" class="form-control" id="exampleInputAmount" placeholder="域名" name="queryDomain" required>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">查询</button>
@@ -83,7 +82,7 @@
                   <caption>最近查询域名</caption>
                     <thead>
                         <tr>
-                            <th>#</th>
+                           <!--  <th>#</th> -->
                             <th>域名</th>
                             <th>IP</th>
                             <!-- <th>顶级域名注册商</th> -->
@@ -97,8 +96,8 @@
                     <tbody>
                       {{range .Domainwhois}}
                         <tr>
-                            <td>{{.Id}}</td>
-                            <td>{{.Domain}}</td>
+                            <!-- <td>{{.Id}}</td> -->
+                            <td><a href="/whois/query?queryDomain={{.Domain}}">{{.Domain}}</a></td> <!-- 可以单击域名查询详细信息 -->
                             <td>{{.Ip}}</td>
                             <!-- <td>{{.TopWhoisServer}}</td> -->
                             <!-- <td>{{.SecWhoisServer}}</td> -->

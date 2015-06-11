@@ -82,21 +82,8 @@
 				        		<span class="glyphicon glyphicon-time"></span>
 				        		<strong>更新时间</strong>
 				        	</td>
-				        	<td>待定</td>
-				        </tr>
-				        <tr>
-				            <td>				        
-				            	<span class="glyphicon glyphicon-cloud-download"></span>
-				            	<strong>详细信息</strong>
-				            </td>
-				            <td>
-				            	<!-- <pre> -->
-									<!-- {{.domain.Details}} -->
-									待定
-								<!-- </pre> -->
-							</td>
-				        </tr>
-				        
+				        	<td>{{.domain.QueryTime}}</td>
+				        </tr>				
 				</table>
 			</div>
 			<!-- 侧边栏 -->
@@ -122,6 +109,8 @@
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
+				<!-- <center><h3>详细信息</h3></center> -->
+				<center><span class="glyphicon glyphicon-cloud-download">详细信息</span></center>
 				<pre>
 					{{.domain.Details}}
 				</pre>

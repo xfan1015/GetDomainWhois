@@ -28,10 +28,6 @@ func (c *WhoisController) Query() {
 	if len(queryDomain) == 0 {
 		beego.Error("查询不能为空")
 		return
-		// r, _ := whoisonline.GetDomainWhois("whois.verisign-grs.com", "baidu.com")
-		// c.Ctx.WriteString(r)
-		// return
-
 	}
 	c.Data["domain"] = models.QueryDomain(queryDomain)
 
