@@ -7,6 +7,7 @@ import (
 	// "GetDomainWhois/whoisonline"
 	"fmt"
 	"time"
+	// "unicode/utf8"
 )
 
 type DomainWhois struct {
@@ -45,7 +46,9 @@ func QueryDomain(queryDomain string) DomainWhois {
 	if err == orm.ErrNoRows {
 		fmt.Println("数据库未有该项,正在在线查询")
 		domain = QueryOnline(queryDomain)
-		o.Insert(&domain)
+		_, err = o.Insert(&domain)
+		// fmt.Println(id)
+		fmt.Println(err.Error())
 		return domain
 	} else {
 		return domain
@@ -56,13 +59,14 @@ func QueryDomain(queryDomain string) DomainWhois {
 func QueryOnline(queryDomain string) DomainWhois {
 	domain := &Domain{}
 	domain.ReturnWhois(queryDomain)
+
 	whois := &DomainWhois{
 		Domain:     domain.DomainName,
 		Ip:         domain.Ip,
-		RegName:    domain.RegName,
+		RegName:    string(domain.RegName),
 		RegEmail:   domain.RegEmail,
 		RegPhone:   domain.RegPhone,
-		Details:    domain.Details,
+		Details:    string(domain.Details),
 		UpdateTime: time.Now(),
 	}
 	return *whois

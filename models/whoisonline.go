@@ -2,6 +2,7 @@ package models
 
 import (
 	"bytes"
+	// "fmt"
 	"io"
 	"net"
 )
@@ -22,6 +23,7 @@ func GetDomainWhois(service, domain string) (string, error) {
 	if err != nil {
 		return "", err
 	}
+	// fmt.Println(result)
 	return string(result), nil
 
 }

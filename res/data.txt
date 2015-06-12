@@ -4416,3 +4416,14 @@ edu.ws
 
 // zw : http://en.wikipedia.org/wiki/.zw
 *.zw
+tr
+gov.tr
+com.tr
+bel.tr
+edu.tr
+net.tr
+web.tr
+gen.tr
+tsk.tr
+org.tr
+

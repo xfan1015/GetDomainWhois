@@ -17,9 +17,9 @@ type DomainSrv struct {
 	Id          int64
 	Name        string `orm:"index;null"` //orm 默认为255
 	Tld         string `orm:"index;null"`
-	RegNameAvl  bool   `orm:"null"` //注册人姓名是否可查
-	RegEmailAvl bool   `orm:"null"` //注册人邮箱是否可查
-	RegPhoneAvl bool   `orm:"null"` //注册人电话是否可查
+	RegNameAvl  string `orm:"size(10);null"` //注册人姓名是否可查
+	RegEmailAvl string `orm:"size(10);null"` //注册人邮箱是否可查
+	RegPhoneAvl string `orm:"size(10);null"` //注册人电话是否可查
 }
 
 //初始化模型
@@ -46,4 +46,15 @@ func GetSrv(tld string) string {
 	} else { //只含有一个服务器
 		return srvName
 	}
+}
+
+func GetAllSrv() ([]*DomainSrv, int, error) {
+	o := orm.NewOrm()
+	dw := make([]*DomainSrv, 0)
+	qs := o.QueryTable("domain_srv")
+	_, err := qs.All(&dw)
+	// _, err := qs.OrderBy("-id").Limit(20).All(&dw) //返回limite个数的最近查询数据，通过倒序id
+	count := len(dw)
+	return dw, count, err
+
 }

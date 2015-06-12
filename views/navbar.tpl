@@ -9,7 +9,7 @@
                 <li{{if .IsHome}}  class="active"{{end}}> <a href="/">首页</a> </li>
                 <li{{if .IsQuery}}  class="active"{{end}}> <a href="/whois">域名whois查询</a> </li>
                 <li{{if .IsTopic}}  class="active"{{end}}> <a href="/topic">统计分析</a> </li>
-                <li{{if .IsTopic}}  class="active"{{end}}> <a href="/topic">注册商查询</a> </li>
+                <li{{if .IsSrv}}  class="active"{{end}}> <a href="/srv">注册商</a> </li>
                 <li{{if .IsPlan}}  class="active"{{end}}> <a href="/plan">网站开发进度</a> </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">

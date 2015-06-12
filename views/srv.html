@@ -1,0 +1,42 @@
+{{template "header"}}
+<link rel="stylesheet"  href="/static/css/test.css">
+<title>WHOIS服务器信息</title>
+</head>
+<body>
+     {{template "navbar" .}}
+
+   <div class="container">
+        
+        <h2>服务器列表<small>共{{.Count}}个顶级域名服务器</small></h2>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>顶级域名</th>
+                    <th>服务器名称</th>
+                    <th>注册人姓名</th>
+                    <th>注册电话</th>
+                    <th>注册邮箱</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range .Srv}}
+                <tr>
+                    <td>{{.Id}}</td>
+                    <td>{{.Tld}}</td>
+                    <td>{{.Name}}</td>
+                    <td>{{.RegNameAvl}}</td>
+                    <td>{{.RegPhoneAvl}}</td>
+                    <td>{{.RegPhoneAvl}}</td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>   
+    </div>
+
+
+
+     <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/bootstrap/3.3.0/js/bootstrap.min.js"></script>
+</body>
+</html>

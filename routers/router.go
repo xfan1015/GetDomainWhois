@@ -11,4 +11,5 @@ func init() {
 	beego.Router("/whois", &controllers.WhoisController{})
 	beego.AutoRouter(&controllers.WhoisController{})
 	beego.Router("/plan", &controllers.PlanController{})
+	beego.Router("/srv", &controllers.SrvController{})
 }
