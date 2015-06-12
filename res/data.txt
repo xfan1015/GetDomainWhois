@@ -4416,6 +4416,8 @@ edu.ws
 
 // zw : http://en.wikipedia.org/wiki/.zw
 *.zw
+
+//my own add
 tr
 gov.tr
 com.tr
@@ -4426,4 +4428,6 @@ web.tr
 gen.tr
 tsk.tr
 org.tr
-
+website
+xxx
+press

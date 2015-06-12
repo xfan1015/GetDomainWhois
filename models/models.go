@@ -46,9 +46,7 @@ func QueryDomain(queryDomain string) DomainWhois {
 	if err == orm.ErrNoRows {
 		fmt.Println("数据库未有该项,正在在线查询")
 		domain = QueryOnline(queryDomain)
-		_, err = o.Insert(&domain)
-		// fmt.Println(id)
-		fmt.Println(err.Error())
+		o.Insert(&domain)
 		return domain
 	} else {
 		return domain

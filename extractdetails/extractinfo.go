@@ -23,7 +23,7 @@ func generalManage(details string) (regName, regPhone, regEmail string) {
 		regPhone = strings.TrimSpace(strings.Split(regPhone, ":")[1]) //获得电话并且去掉姓名前后的空白
 	}
 	//获得注册人邮箱
-	re, _ = regexp.Compile("Registrant Email:.*")
+	re, _ = regexp.Compile("Registrant Email:.*|Registrant E-mail:.*")
 	regEmail = re.FindString(details)
 	if len(regEmail) != 0 {
 		regEmail = strings.TrimSpace(strings.Split(regEmail, ":")[1]) //获得注册人姓名并且去掉姓名前后的空白
@@ -34,6 +34,8 @@ func generalManage(details string) (regName, regPhone, regEmail string) {
 	// fmt.Println(regPhone)
 	return regName, regPhone, regEmail
 }
+
+//顶级域名tr提取函数
 func trManage(details string) (regName, regPhone, regEmail string) {
 	re, _ := regexp.Compile("Organization Name.*|Person.*")
 	regName = re.FindString(details)
@@ -64,7 +66,7 @@ func trManage(details string) (regName, regPhone, regEmail string) {
 func ExtractWhoisInfo(details, topServer string) (regName, regPhone, regEmail string) {
 
 	switch topServer {
-	case "whois.nic.us":
+	case "whois.nic.us", "whois.nic.co", "whois.nic.website", "whois.nic.xxx", "whois.nic.press", "whois.nic.mn", "whois.nic.me", "whois.meregistry.net":
 		regName, regPhone, regEmail = generalManage(details)
 		return
 	case "whois.nic.uk":

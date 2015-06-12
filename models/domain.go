@@ -7,8 +7,10 @@ import (
 	// "fmt"
 	"net"
 	"os"
+	"regexp"
 	"strings"
 	"time"
+	// "unicode/utf8"
 )
 
 type Domain struct {
@@ -45,6 +47,7 @@ func (domain *Domain) init() {
 
 //获取域名whois信息
 func (domain *Domain) domainWhois() {
+	re, _ := regexp.Compile("[\x00-\x7F]*")
 	result, _ := GetDomainWhois(domain.TopWhoisSrv, domain.DomainName)
 	var ip string
 	// fmt.Println(domain.DomainName)
@@ -53,8 +56,10 @@ func (domain *Domain) domainWhois() {
 		ip = strings.Join(ips, ",")
 	}
 
-	domain.Details = result
 	regname, regphone, regemail := extractdetails.ExtractWhoisInfo(result, domain.TopWhoisSrv)
+	result = re.FindString(result)
+	regname = re.FindString(regname)
+	domain.Details = result
 	domain.RegName = regname
 	domain.RegEmail = regemail
 	domain.RegPhone = regphone
