@@ -1,4 +1,5 @@
-package whoisonline
+//该包用来获取输入网址的顶级域名(二级域名)和查询域名(domainName)
+package gettld
 
 import (
 	"fmt"
@@ -18,7 +19,6 @@ func openfile(filename string) string {
 		fmt.Println(err)
 		os.Exit(1)
 	}
-	// fmt.Println(string(data))
 	return string(data)
 
 }

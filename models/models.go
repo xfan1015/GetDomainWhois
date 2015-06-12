@@ -4,23 +4,21 @@ import (
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
 	// "github.com/astaxie/beego"
-	"GetDomainWhois/whoisonline"
+	// "GetDomainWhois/whoisonline"
 	"fmt"
 	"time"
 )
 
 type DomainWhois struct {
-	Id             int64
-	Domain         string `orm:"index"` //orm 默认为255
-	Ip             string
-	TopWhoisServer string
-	SecWhoisServer string
-	RegName        string    `orm:"index"`
-	RegEmail       string    `orm:"index"`
-	RegPhone       string    `orm:"index"`
-	Details        string    `orm:"size(10000)"`
-	UpdateTime     time.Time `orm:"index"`
-	QueryTimes     int64     //查询次数
+	Id         int64
+	Domain     string    `orm:"index;size(50);null"` //orm 默认为255
+	Ip         string    `orm:"null"`
+	RegName    string    `orm:"index;null"`
+	RegEmail   string    `orm:"index;null"`
+	RegPhone   string    `orm:"index;null"`
+	Details    string    `orm:"size(10000);null"`
+	UpdateTime time.Time `orm:"index;null"`
+	QueryTimes int64     `orm:"null"` //查询次数
 }
 
 func init() {
@@ -56,18 +54,16 @@ func QueryDomain(queryDomain string) DomainWhois {
 
 //在线查询得到的域名whois信息
 func QueryOnline(queryDomain string) DomainWhois {
-	domain := &whoisonline.Domain{}
+	domain := &Domain{}
 	domain.ReturnWhois(queryDomain)
 	whois := &DomainWhois{
-		Domain:         domain.DomainName,
-		Ip:             domain.Ip,
-		TopWhoisServer: domain.TopWhoisSrv,
-		SecWhoisServer: domain.SecWhoisSrv,
-		RegName:        domain.RegName,
-		RegEmail:       domain.RegEmail,
-		RegPhone:       domain.RegPhone,
-		Details:        domain.Details,
-		UpdateTime:     time.Now(),
+		Domain:     domain.DomainName,
+		Ip:         domain.Ip,
+		RegName:    domain.RegName,
+		RegEmail:   domain.RegEmail,
+		RegPhone:   domain.RegPhone,
+		Details:    domain.Details,
+		UpdateTime: time.Now(),
 	}
 	return *whois
 }

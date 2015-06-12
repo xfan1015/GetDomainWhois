@@ -1,4 +1,4 @@
-package whoisonline
+package extractdetails
 
 import (
 	"fmt"
@@ -35,6 +35,7 @@ func generalManage(details string) (regName, regPhone, regEmail string) {
 	return regName, regPhone, regEmail
 }
 
+//选择函数
 func ExtractWhoisInfo(details, topServer string) (regName, regPhone, regEmail string) {
 
 	switch topServer {

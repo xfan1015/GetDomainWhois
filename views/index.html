@@ -99,13 +99,11 @@
                             <!-- <td>{{.Id}}</td> -->
                             <td><a href="/whois/query?queryDomain={{.Domain}}">{{.Domain}}</a></td> <!-- 可以单击域名查询详细信息 -->
                             <td>{{.Ip}}</td>
-                            <!-- <td>{{.TopWhoisServer}}</td> -->
-                            <!-- <td>{{.SecWhoisServer}}</td> -->
+
                             <td>{{.RegName}}</td>
                             <td>{{.RegEmail}}</td>
                             <td>{{.RegPhone}}</td>
-                            <!-- <td>{{.QueryTime}}</td> -->
-                            <td>{{date .QueryTime "Y-m-d H:i:s"}}</td>
+                            <td>{{date .UpdateTime "Y-m-d H:i:s"}}</td>
                         </tr>
                         {{end}}
                     </tbody>

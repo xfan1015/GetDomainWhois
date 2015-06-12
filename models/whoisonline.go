@@ -1,4 +1,4 @@
-package whoisonline
+package models
 
 import (
 	"bytes"

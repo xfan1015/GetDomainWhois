@@ -1,7 +1,10 @@
-package whoisonline
+package models
 
 import (
-	"fmt"
+	"GetDomainWhois/extractdetails"
+	"GetDomainWhois/gettld"
+	// "GetDomainWhois/models"sss
+	// "fmt"
 	"net"
 	"os"
 	"strings"
@@ -25,10 +28,12 @@ type Domain struct {
 
 //
 func (domain *Domain) init() {
-	tldTop, topDomain, domainName := getTld(domain.RawUrl)
-
-	topWhoisSrv := GetWhoisSrv(tldTop)
+	// tldTop, topDomain, domainName := getTld(domain.RawUrl)
+	tldTop, topDomain, domainName := gettld.Extract_tld(domain.RawUrl)
+	// topWhoisSrv := GetWhoisSrv(tldTop)
+	topWhoisSrv := GetSrv(tldTop)
 	if len(topWhoisSrv) == 0 {
+		// fmt.Println("")
 		os.Exit(1)
 	}
 	domain.topTld = tldTop
@@ -38,33 +43,18 @@ func (domain *Domain) init() {
 
 }
 
-//获取顶级域名或者二级域名
-func getTld(rawurl string) (string, string, string) {
-	tldTop, topDomain, domainName := Extract_tld(rawurl)
-	if len(domainName) == 0 {
-		os.Exit(1)
-	}
-	// if !sec {
-	// 	return tldTop, topDomain, domainName
-	// }
-	// return topDomain, topDomain, domainName
-	//二级域名查询代码要写在这里
-	return tldTop, topDomain, domainName
-
-}
-
 //获取域名whois信息
 func (domain *Domain) domainWhois() {
 	result, _ := GetDomainWhois(domain.TopWhoisSrv, domain.DomainName)
 	var ip string
-	fmt.Println(domain.DomainName)
+	// fmt.Println(domain.DomainName)
 	ips, err := net.LookupHost(domain.DomainName)
 	if err == nil {
 		ip = strings.Join(ips, ",")
 	}
 
 	domain.Details = result
-	regname, regphone, regemail := ExtractWhoisInfo(result, domain.TopWhoisSrv)
+	regname, regphone, regemail := extractdetails.ExtractWhoisInfo(result, domain.TopWhoisSrv)
 	domain.RegName = regname
 	domain.RegEmail = regemail
 	domain.RegPhone = regphone
