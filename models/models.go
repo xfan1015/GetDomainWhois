@@ -59,6 +59,7 @@ func QueryOnline(queryDomain string) DomainWhois {
 	domain.ReturnWhois(queryDomain)
 	whois := &DomainWhois{
 		Domain:         domain.DomainName,
+		Ip:             domain.Ip,
 		TopWhoisServer: domain.TopWhoisSrv,
 		SecWhoisServer: domain.SecWhoisSrv,
 		RegName:        domain.RegName,

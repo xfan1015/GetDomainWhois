@@ -6,13 +6,13 @@ body {
   padding-bottom: 40px;  /*页面下方大小*/
   color: #5a5a5a;
   min-height: 1000px;
-  /*padding-top: 70px;*/
+  padding-top: 70px;
 
 }
 /*使表格内容居中*/
-.table th, .table td {
+/*.table th, .table td {
     text-align: center;
-}
+}*/
 
 /* CUSTOMIZE THE NAVBAR
 -------------------------------------------------- */
@@ -45,7 +45,7 @@ body {
 
 /* Carousel base class */
 .carousel {
-  height: 400px; /*修改大小*/
+  height: 300px; /*修改大小*/
   margin-bottom: 60px;
 }
 /* Since positioning the image, we need to help out the caption */
@@ -55,7 +55,7 @@ body {
 
 /* Declare heights because of positioning of img element */
 .carousel .item {
-  height: 400px; /*修改大小*/
+  height: 300px; /*修改大小*/
   background-color: #777;
 }
 .carousel-inner > .item > img {
@@ -63,7 +63,7 @@ body {
   top: 0;
   left: 0;
   min-width: 100%;
-  height: 400px; /*修改大小*/
+  height: 300px; /*修改大小*/
 }
 
 

@@ -1,22 +1,58 @@
 {{template "header"}}
-<link rel="stylesheet"  href="/static/css/signin.css">
-<title>登录，我的博客</title>
+<link rel="stylesheet"  href="/static/css/test.css">
+<title>进度安排</title>
 </head>
 <body>
+     {{template "navbar" .}}
     <div class="container">
-       <center><h1>这是开发进度展示</h1></center>
-       <h4>有序列表</h4>
-       <ol>
-         <li>Item 1</li>
-         <li>Item 2</li>
-         <li>Item 3</li>
-         <li>Item 4</li>
-       </ol>
+       <center><h2>开发进度</h2></center>
+
+       <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <hr>
+            <h4>2015.6.11</h4>
+              <ol>
+               <li><p class="text-success">精确查询功能完成</p></li>
+               <li><p class="text-success">用户查询，若数据库没有，则将查询到的域名插入到数据库中</p></li>
+               <li><p class="text-success">首页最近查询展示功能完成</p></li>
+               <li><p class="text-success">首页域名连接查询</p></li>
+               <li><p class="text-success">在线whois查询</p></li>
+               <li><p class="text-success">在线IP更新</p></li>
+             </ol>
+           <h4>2015.6.12</h4>
+           <ol>
+            <li><p class="text-danger">模糊查询</p></li>
+            <li><p class="text-danger">历史查询记录展示</p></li>
+            <li><p class="text-danger">提取函数完善其他</p></li>
+            <li><p class="text-danger">...</p></li>
+           </ol>
+         </div>
+
+         <div class="col-md-3"></div>
+        </div>
+
     </div>
+    <hr>
+    <div class="container">
+       <center><h2>域名注册商python迁移到golang</h2></center>
 
+       <div class="row">
+          <div class="col-md-3"></div>
+          <div class="col-md-6">
+            <hr>
+            
+              <ol>
+                <h4>2015.6.11</h4>
+               <li><p class="text-success">us</p></li>
+               <h4>2015.6.12</h4>
+               <li><p class="text-danger">先把通用格式的注册商添加到代码中</p></li>
+             </ol>
 
+         <div class="col-md-3"></div>
+        </div>
 
-
+    </div>
 
 
 

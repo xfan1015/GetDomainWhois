@@ -29,24 +29,25 @@ func generalManage(details string) (regName, regPhone, regEmail string) {
 		regEmail = strings.TrimSpace(strings.Split(regEmail, ":")[1]) //获得注册人姓名并且去掉姓名前后的空白
 	}
 
-	fmt.Println(regName)
-	fmt.Println(regEmail)
-	fmt.Println(regPhone)
+	// fmt.Println(regName)
+	// fmt.Println(regEmail)
+	// fmt.Println(regPhone)
 	return regName, regPhone, regEmail
 }
 
 func ExtractWhoisInfo(details, topServer string) (regName, regPhone, regEmail string) {
 
 	switch topServer {
-	case "whois.nic.us":
+	case "whois.nic.us", "whois.nic.tr":
 		regName, regPhone, regEmail = generalManage(details)
 		return
 	case "whois.nic.uk":
 		generalManage(details)
+		return
 	default:
 		fmt.Println("meiyou")
+		// return "", "", ""
 	}
-
 	return "", "", ""
 
 }

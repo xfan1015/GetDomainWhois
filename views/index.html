@@ -90,7 +90,7 @@
                             <th>注册人</th>
                             <th>邮箱</th>
                             <th>电话</th>
-                            <!-- <th>其他</th> -->
+                            <th>更新时间</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -104,7 +104,8 @@
                             <td>{{.RegName}}</td>
                             <td>{{.RegEmail}}</td>
                             <td>{{.RegPhone}}</td>
-                            <!-- <td>{{.Details}}</td> -->
+                            <!-- <td>{{.QueryTime}}</td> -->
+                            <td>{{date .QueryTime "Y-m-d H:i:s"}}</td>
                         </tr>
                         {{end}}
                     </tbody>

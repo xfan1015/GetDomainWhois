@@ -1,8 +1,10 @@
 package whoisonline
 
 import (
-	// "fmt"
+	"fmt"
+	"net"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -10,7 +12,8 @@ type Domain struct {
 	RawUrl      string //网址
 	DomainName  string //可查询域名
 	TopDomain   string //顶级域名
-	topTld      string
+	topTld      string //要查询的域名
+	Ip          string
 	TopWhoisSrv string    //顶级域名服务器
 	SecWhoisSrv string    //二级域名服务器
 	RegName     string    //注册人姓名
@@ -53,13 +56,19 @@ func getTld(rawurl string) (string, string, string) {
 //获取域名whois信息
 func (domain *Domain) domainWhois() {
 	result, _ := GetDomainWhois(domain.TopWhoisSrv, domain.DomainName)
-	// fmt.Println(result)
-	// fmt.Println(err)
+	var ip string
+	fmt.Println(domain.DomainName)
+	ips, err := net.LookupHost(domain.DomainName)
+	if err == nil {
+		ip = strings.Join(ips, ",")
+	}
+
 	domain.Details = result
 	regname, regphone, regemail := ExtractWhoisInfo(result, domain.TopWhoisSrv)
 	domain.RegName = regname
 	domain.RegEmail = regemail
 	domain.RegPhone = regphone
+	domain.Ip = ip
 
 }
 
