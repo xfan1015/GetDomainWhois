@@ -10,8 +10,8 @@ import (
 )
 
 func init() {
-	orm.RegisterDriver("mysql", orm.DR_MySQL)                                                                              //注册数据库驱动
-	orm.RegisterDataBase("default", "mysql", "root:@/malicious_detect?charset=utf8&loc="+url.QueryEscape("Asia/Shanghai")) //注册数据库,务必加上时区设置，否则出错
+	orm.RegisterDriver("mysql", orm.DR_MySQL)                                                                                    //注册数据库驱动
+	orm.RegisterDataBase("default", "mysql", "root:cynztt@/malicious_detect?charset=utf8&loc="+url.QueryEscape("Asia/Shanghai")) //注册数据库,务必加上时区设置，否则出错
 }
 
 func main() {
