@@ -19,7 +19,8 @@ type DomainWhois struct {
 	RegEmail       string    `orm:"index"`
 	RegPhone       string    `orm:"index"`
 	Details        string    `orm:"size(10000)"`
-	QueryTime      time.Time `orm:"index"`
+	UpdateTime     time.Time `orm:"index"`
+	QueryTimes     int64     //查询次数
 }
 
 func init() {
@@ -66,7 +67,7 @@ func QueryOnline(queryDomain string) DomainWhois {
 		RegEmail:       domain.RegEmail,
 		RegPhone:       domain.RegPhone,
 		Details:        domain.Details,
-		QueryTime:      time.Now(),
+		UpdateTime:     time.Now(),
 	}
 	return *whois
 }
