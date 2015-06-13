@@ -67,6 +67,7 @@ func ExtractWhoisInfo(details, topServer string) (regName, regPhone, regEmail st
 
 	switch topServer {
 	case "whois.nic.us", "whois.nic.co", "whois.nic.website", "whois.nic.xxx", "whois.nic.press", "whois.nic.mn", "whois.nic.me", "whois.meregistry.net":
+	case "whois.publicinterestregistry.net", "whois.pir.org", "whois.pandi.or.id", "whois2.afilias-grs.net", "whois.afilias.info", "whois.nic.uno":
 		regName, regPhone, regEmail = generalManage(details)
 		return
 	case "whois.nic.uk":

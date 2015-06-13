@@ -1075,8 +1075,7 @@ tozsde.hu
 utazas.hu
 video.hu
 
-// id : http://en.wikipedia.org/wiki/.id
-*.id
+
 
 // ie : http://en.wikipedia.org/wiki/.ie
 ie
@@ -4431,3 +4430,17 @@ org.tr
 website
 xxx
 press
+
+id
+co.id
+web.id
+ac.id
+or.id
+go.id
+net.id
+kaskus.id
+mil.id
+sch.id
+my.id
+
+uno

@@ -57,9 +57,11 @@ func (domain *Domain) domainWhois() {
 	}
 
 	regname, regphone, regemail := extractdetails.ExtractWhoisInfo(result, domain.TopWhoisSrv)
-	result = re.FindString(result)
-	regname = re.FindString(regname)
-	domain.Details = result
+	result1 := re.FindAllString(result, -1)
+	result = strings.Join(result1, " ")
+	regname1 := re.FindAllString(regname, -1)
+	regname = strings.Join(regname1, "")
+	domain.Details = strings.TrimSpace(result)
 	domain.RegName = regname
 	domain.RegEmail = regemail
 	domain.RegPhone = regphone
