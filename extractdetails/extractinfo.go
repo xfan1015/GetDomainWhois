@@ -171,6 +171,21 @@ func cfManage(details string) (regName, regPhone, regEmail string) {
 	return
 }
 
+//tr顶级域名处理函数
+func trManage(details string) (regName, regPhone, regEmail string) {
+	//	re, _ := regexp.Compile("Registrant:[\n].*|.*@.*|\\+.*")
+	re, _ := regexp.Compile("Registrant:[\n].*")
+	result := re.FindString(details)
+	regName = strings.TrimSpace(strings.Split(result, ":")[1])
+
+	re, _ = regexp.Compile(".*@.*")
+	regEmail = strings.TrimSpace(re.FindString(details))
+
+	re, _ = regexp.Compile("\\+.*")
+	regPhone = strings.TrimSpace(re.FindString(details))
+	return
+}
+
 //选择函数
 func ExtractWhoisInfo(details, topServer, domainName string) (regName, regPhone, regEmail, newResult string) {
 	newResult = ""
@@ -201,7 +216,9 @@ func ExtractWhoisInfo(details, topServer, domainName string) (regName, regPhone,
 	case "whois.dot.cf":
 		regName, regPhone, regEmail = cfManage(details)
 		return
-
+	case "whois.nic.tr":
+		regName, regPhone, regEmail = trManage(details)
+		return
 	default:
 		fmt.Println("meiyou")
 
