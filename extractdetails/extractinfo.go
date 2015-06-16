@@ -9,7 +9,7 @@ import (
 	"strings"
 )
 
-//通用提取函数
+//通用提取函数，可以参考ua优化，使用switch as
 func generalManage(details string) (regName, regPhone, regEmail string) {
 
 	//获得注册人姓名
@@ -122,6 +122,55 @@ func isXxx(details string) bool {
 	return true
 }
 
+//ua顶级域名处理函数，注册商可以提取,电话邮箱部分提取
+func uaManage(details string) (regName, regPhone, regEmail string) {
+	re, _ := regexp.Compile("registrar:.*|e-mail:.*|phone:.*")
+	result := re.FindAllString(details, -1)
+	for _, v := range result {
+
+		switch strings.TrimSpace(strings.Split(v, ":")[0]) {
+		case "registrar":
+			regName = strings.TrimSpace(strings.Split(v, ":")[1])
+		case "e-mail":
+			regEmail = strings.TrimSpace(strings.Split(v, ":")[1])
+		case "phone":
+			regPhone = strings.TrimSpace(strings.Split(v, ":")[1])
+			return
+		}
+	}
+	return
+}
+
+//ie,ru顶级域名处理函数，注册人提取，无电话邮箱
+func ieManage(details string) (regName, regPhone, regEmail string) {
+	re, _ := regexp.CompilePOSIX("person:.*|registrar:.*|Registrar Name:.*")
+	regName = re.FindString(details)
+	if len(regName) != 0 {
+		regName = strings.TrimSpace(strings.Split(regName, ":")[1])
+	}
+	return
+}
+
+//cf顶级域名处理函数，免费域名没有注册人信息，但是非免费有所有信息
+func cfManage(details string) (regName, regPhone, regEmail string) {
+	re, _ := regexp.Compile("Name:.*|Phone:.*|E-mail.*")
+	result := re.FindAllString(details, -1)
+	for _, v := range result {
+
+		switch strings.TrimSpace(strings.Split(v, ":")[0]) {
+		case "Name":
+			regName = strings.TrimSpace(strings.Split(v, ":")[1])
+		case "E-mail":
+			regEmail = strings.TrimSpace(strings.Split(v, ":")[1])
+			return
+		case "Phone":
+			regPhone = strings.TrimSpace(strings.Split(v, ":")[1])
+
+		}
+	}
+	return
+}
+
 //选择函数
 func ExtractWhoisInfo(details, topServer, domainName string) (regName, regPhone, regEmail, newResult string) {
 	newResult = ""
@@ -132,8 +181,11 @@ func ExtractWhoisInfo(details, topServer, domainName string) (regName, regPhone,
 	case "whois.cat", "whois.donuts.co", "whois.nic.pw", "whois.nic.net.ng", "whois-dub.mm-registry.com", "whois.nic.zm", "whois.nic.club", "whois.uniregistry.net":
 		regName, regPhone, regEmail = generalManage(details)
 		return
-	case "whois.nic.uk":
-		generalManage(details)
+	case "whois.com.ua":
+		regName, regPhone, regEmail = uaManage(details)
+		return
+	case "whois.iedr.ie", "whois.domainregistry.ie", "whois.ripn.net", "whois.registry.om":
+		regName, regPhone, regEmail = ieManage(details)
 		return
 	case "whois.nic.tr":
 		regName, regPhone, regEmail = trManage(details)
@@ -144,6 +196,12 @@ func ExtractWhoisInfo(details, topServer, domainName string) (regName, regPhone,
 	case "whois.crsnic.net", "whois.verisign-grs.com", "jobswhois.verisign-grs.com":
 		regName, regPhone, regEmail, newResult = comManage(details, domainName, topServer)
 		return
+	case "whois.nic.es": //保密，无法提取
+		return
+	case "whois.dot.cf":
+		regName, regPhone, regEmail = cfManage(details)
+		return
+
 	default:
 		fmt.Println("meiyou")
 

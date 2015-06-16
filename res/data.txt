@@ -3348,8 +3348,7 @@ nu
 // nz : http://en.wikipedia.org/wiki/.nz
 *.nz
 
-// om : http://en.wikipedia.org/wiki/.om
-*.om
+
 
 // org : http://en.wikipedia.org/wiki/.org
 org
@@ -4468,3 +4467,8 @@ com.zm
 ac.zm
 
 gift
+// om : http://en.wikipedia.org/wiki/.om
+om
+gov.om
+edu.om
+co.om
