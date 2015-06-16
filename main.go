@@ -3,6 +3,7 @@ package main
 import (
 	_ "GetDomainWhois/models"
 	_ "GetDomainWhois/routers"
+	//	"fmt"
 	"github.com/astaxie/beego"
 	"github.com/astaxie/beego/orm"
 	_ "github.com/go-sql-driver/mysql"
@@ -16,6 +17,7 @@ func init() {
 
 func main() {
 	orm.Debug = true
+	//	fmt.Println("test")
 	orm.RunSyncdb("default", false, true) //false的意思是不用每次重新删掉重建
 	beego.Run()
 }

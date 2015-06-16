@@ -1555,8 +1555,7 @@ or.jp
 !city.shizuoka.jp
 !city.yokohama.jp
 
-// ke : http://www.kenic.or.ke/index.php?option=com_content&task=view&id=117&Itemid=145
-*.ke
+
 
 // kg : http://www.domain.kg/dmn_n.html
 kg
@@ -4410,8 +4409,7 @@ edu.ws
 // za : http://www.zadna.org.za/slds.html
 *.za
 
-// zm : http://en.wikipedia.org/wiki/.zm
-*.zm
+
 
 // zw : http://en.wikipedia.org/wiki/.zw
 *.zw
@@ -4444,3 +4442,29 @@ sch.id
 my.id
 
 uno
+
+ke
+go.ke
+co.ke
+
+xyz
+
+photos
+
+guru
+
+today
+
+land
+
+email
+
+country
+
+zm
+co.zm
+org.zm
+com.zm
+ac.zm
+
+gift

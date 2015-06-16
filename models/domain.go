@@ -56,12 +56,12 @@ func (domain *Domain) domainWhois() {
 		ip = strings.Join(ips, ",")
 	}
 
-	regname, regphone, regemail := extractdetails.ExtractWhoisInfo(result, domain.TopWhoisSrv)
+	regname, regphone, regemail, newResult := extractdetails.ExtractWhoisInfo(result, domain.TopWhoisSrv, domain.DomainName)
 	result1 := re.FindAllString(result, -1)
 	result = strings.Join(result1, " ")
 	regname1 := re.FindAllString(regname, -1)
 	regname = strings.Join(regname1, "")
-	domain.Details = strings.TrimSpace(result)
+	domain.Details = strings.TrimSpace(result + newResult)
 	domain.RegName = regname
 	domain.RegEmail = regemail
 	domain.RegPhone = regphone
