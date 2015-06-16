@@ -172,16 +172,33 @@ func cfManage(details string) (regName, regPhone, regEmail string) {
 }
 
 //tr顶级域名处理函数
-func trManage(details string) (regName, regPhone, regEmail string) {
-	//	re, _ := regexp.Compile("Registrant:[\n].*|.*@.*|\\+.*")
-	re, _ := regexp.Compile("Registrant:[\n].*")
-	result := re.FindString(details)
-	regName = strings.TrimSpace(strings.Split(result, ":")[1])
+//func trManage(details string) (regName, regPhone, regEmail string) {
+//	re, _ := regexp.Compile("Registrant:[\n].*")
+//	result := re.FindString(details)
+//	regName = strings.TrimSpace(strings.Split(result, ":")[1])
 
-	re, _ = regexp.Compile(".*@.*")
+//	re, _ = regexp.Compile(".*@.*")
+//	regEmail = strings.TrimSpace(re.FindString(details))
+
+//	re, _ = regexp.Compile("\\+.*")
+//	regPhone = strings.TrimSpace(re.FindString(details))
+//	return
+//}
+
+//pt处理函数
+func ptManage(details string) (regName, regPhone, regEmail string) {
+
+	re, _ := regexp.Compile("Titular / Registrant.\\n.*")
+	result := re.FindString(details)
+	regName = strings.TrimSpace(strings.Split(result, "\n")[1])
+
+	re, _ = regexp.Compile("Email:.*|.*@.*")
 	regEmail = strings.TrimSpace(re.FindString(details))
 
-	re, _ = regexp.Compile("\\+.*")
+	if strings.Index(regEmail, "Email") != -1 {
+		regEmail = strings.TrimSpace(strings.Split(regEmail, ":")[1])
+	}
+	re, _ = regexp.Compile("\\d{4}-\\d{3}.*")
 	regPhone = strings.TrimSpace(re.FindString(details))
 	return
 }
@@ -202,9 +219,6 @@ func ExtractWhoisInfo(details, topServer, domainName string) (regName, regPhone,
 	case "whois.iedr.ie", "whois.domainregistry.ie", "whois.ripn.net", "whois.registry.om":
 		regName, regPhone, regEmail = ieManage(details)
 		return
-	case "whois.nic.tr":
-		regName, regPhone, regEmail = trManage(details)
-		return
 	case "whois.nic.as":
 		regName, regPhone, regEmail = asManage(details)
 		return
@@ -219,6 +233,10 @@ func ExtractWhoisInfo(details, topServer, domainName string) (regName, regPhone,
 	case "whois.nic.tr":
 		regName, regPhone, regEmail = trManage(details)
 		return
+	case "whois.dns.pt":
+		regName, regPhone, regEmail = ptManage(details)
+		return
+
 	default:
 		fmt.Println("meiyou")
 
