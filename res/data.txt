@@ -4405,8 +4405,7 @@ edu.ws
 // yu : http://www.nic.yu/pravilnik-e.html
 *.yu
 
-// za : http://www.zadna.org.za/slds.html
-*.za
+
 
 
 
@@ -4467,8 +4466,13 @@ com.zm
 ac.zm
 
 gift
+
 // om : http://en.wikipedia.org/wiki/.om
 om
 gov.om
 edu.om
 co.om
+// za : http://www.zadna.org.za/slds.html
+co.za
+gov.za
+ac.za

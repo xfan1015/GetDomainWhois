@@ -32,8 +32,14 @@ type Domain struct {
 func (domain *Domain) init() {
 	// tldTop, topDomain, domainName := getTld(domain.RawUrl)
 	tldTop, topDomain, domainName := gettld.Extract_tld(domain.RawUrl)
-	// topWhoisSrv := GetWhoisSrv(tldTop)
-	topWhoisSrv := GetSrv(tldTop)
+	//以下代码为区分顶级域名服务器不同的情况
+	var topWhoisSrv string
+	if tldTop == "za" {
+		topWhoisSrv = GetSrv(topDomain)
+	} else {
+		topWhoisSrv = GetSrv(tldTop)
+	}
+
 	if len(topWhoisSrv) == 0 {
 		// fmt.Println("")
 		os.Exit(1)

@@ -13,13 +13,13 @@ import (
 func generalManage(details string) (regName, regPhone, regEmail string) {
 
 	//获得注册人姓名
-	re, _ := regexp.Compile("Registrant Name:.*|Organization Name.*|Person.*")
+	re, _ := regexp.Compile("Registrant Name:.*|Organization Name.*|Person.*|registrar:.*")
 	regName = re.FindString(details)
 	if len(regName) != 0 {
 		regName = strings.TrimSpace(strings.Split(regName, ":")[1]) //获得注册人姓名并且去掉姓名前后的空白
 	}
 	//获得注册人电话
-	re, _ = regexp.Compile("Registrant Phone Number:.*|Phone.*|Registrant Phone:.*")
+	re, _ = regexp.Compile("Registrant Phone Number:.*|Phone.*|Registrant Phone:.*|phone:.*")
 	regPhone = re.FindString(details)
 	if len(regPhone) != 0 {
 		regPhone = strings.TrimSpace(strings.Split(regPhone, ":")[1]) //获得电话并且去掉姓名前后的空白
@@ -188,18 +188,68 @@ func cfManage(details string) (regName, regPhone, regEmail string) {
 //pt处理函数
 func ptManage(details string) (regName, regPhone, regEmail string) {
 
-	re, _ := regexp.Compile("Titular / Registrant.\\n.*")
+	re, _ := regexp.Compile("Titular / Registrant.\\n.*|Administrative Contact for DNS.\\n.*|REGISTRAR:.\\n.*")
 	result := re.FindString(details)
-	regName = strings.TrimSpace(strings.Split(result, "\n")[1])
+	if len(result) != 0 {
+		regName = strings.TrimSpace(strings.Split(result, "\n")[1])
+	}
 
 	re, _ = regexp.Compile("Email:.*|.*@.*")
-	regEmail = strings.TrimSpace(re.FindString(details))
-
-	if strings.Index(regEmail, "Email") != -1 {
-		regEmail = strings.TrimSpace(strings.Split(regEmail, ":")[1])
+	result = re.FindString(details)
+	if len(result) != 0 {
+		regEmail = strings.TrimSpace(result)
+		if strings.Index(regEmail, "Email") != -1 {
+			regEmail = strings.TrimSpace(strings.Split(regEmail, ":")[1])
+		}
 	}
-	re, _ = regexp.Compile("\\d{4}-\\d{3}.*")
-	regPhone = strings.TrimSpace(re.FindString(details))
+
+	re, _ = regexp.Compile("\\d{4}-\\d{3}.*|Tel.*|\\+.*")
+	result = re.FindString(details)
+	if len(result) != 0 {
+		regPhone = strings.TrimSpace(result)
+	}
+
+	return
+}
+
+//co.za处理函数
+func coZaManage(details string) (regName, regPhone, regEmail string) {
+
+	re, _ := regexp.Compile("Registrant:\\n.*|Email:.*|Tel:.*|")
+	result := re.FindAllString(details, -1)
+	for _, v := range result {
+
+		switch strings.TrimSpace(strings.Split(v, ":")[0]) {
+		case "Registrant":
+			regName = strings.TrimSpace(strings.Split(v, ":")[1])
+		case "Email":
+			regEmail = strings.TrimSpace(strings.Split(v, ":")[1])
+		case "Tel":
+			regPhone = strings.TrimSpace(strings.Split(v, ":")[1])
+			return
+		}
+	}
+	return
+}
+
+//gov.za
+func govZaManage(details string) (regName, regPhone, regEmail string) {
+
+	re, _ := regexp.Compile("Admin Contact Name.*|Cell Phone.*|Email.*|")
+	result := re.FindAllString(details, -1)
+	//	fmt.Println(result)
+	for _, v := range result {
+
+		switch strings.TrimSpace(strings.Split(v, ":")[0]) {
+		case "Admin Contact Name":
+			regName = strings.TrimSpace(strings.Split(v, ":")[1])
+		case "Cell Phone":
+			regPhone = strings.TrimSpace(strings.Split(v, ":")[1])
+		case "Email":
+			regEmail = strings.TrimSpace(strings.Split(v, ":")[1])
+			return
+		}
+	}
 	return
 }
 
@@ -211,6 +261,7 @@ func ExtractWhoisInfo(details, topServer, domainName string) (regName, regPhone,
 	case "whois.publicinterestregistry.net", "whois.pir.org", "whois.pandi.or.id", "whois2.afilias-grs.net", "whois.afilias.info", "whois.nic.uno", "whois.registry.pro":
 	case "whois.kenic.or.ke", "whois.nic.xyz", "whois.neulevel.biz", "whois.dotmobiregistry.net", "whois.registry.in", "whois.adamsnames.tc", "whois.registrypro.pro":
 	case "whois.cat", "whois.donuts.co", "whois.nic.pw", "whois.nic.net.ng", "whois-dub.mm-registry.com", "whois.nic.zm", "whois.nic.club", "whois.uniregistry.net":
+	case "whois.tld.ee":
 		regName, regPhone, regEmail = generalManage(details)
 		return
 	case "whois.com.ua":
@@ -233,10 +284,15 @@ func ExtractWhoisInfo(details, topServer, domainName string) (regName, regPhone,
 	case "whois.nic.tr":
 		regName, regPhone, regEmail = trManage(details)
 		return
-	case "whois.dns.pt":
+	case "whois.dns.pt", "196.21.79.52", "whois.dns.pl":
 		regName, regPhone, regEmail = ptManage(details)
 		return
-
+	case "whois.registry.net.za":
+		regName, regPhone, regEmail = coZaManage(details)
+		return
+	case "163.195.16.25":
+		regName, regPhone, regEmail = govZaManage(details)
+		return
 	default:
 		fmt.Println("meiyou")
 
